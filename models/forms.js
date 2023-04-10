@@ -2,35 +2,23 @@ const { Sequelize, DataTypes } = require('sequelize');
 
 const sequilize = new Sequelize('mysql://root@localhost:3306/gpt-team')
 
-const User = sequilize.define('User', {
-    user_id: {
+const Forms = sequilize.define('Forms', {
+    form_id: {
         type: DataTypes.STRING,
         primaryKey: true,
         allowNull: false
     },
-    username: {
+    user_id: {
         type: DataTypes.STRING,
         allowNull: false
     },
-    email: {
+    title: {
         type: DataTypes.STRING,
         allowNull: false
     },
-    password: {
+    description: {
         type: DataTypes.STRING,
         allowNull: false
-    },
-    password: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
-    active: {
-        type: DataTypes.INTEGER,
-        allowNull: false
-    },
-    avatar: {
-        type: DataTypes.STRING,
-        allowNull: true
     },
     created_at: {
         type: DataTypes.DATE,
@@ -43,10 +31,9 @@ const User = sequilize.define('User', {
 
 },
 {
-    tableName: 'users',
+    tableName: 'forms',
     timestamps: true,
     createdAt: 'created_at',
     updatedAt: 'updated_at'
 })
-
-module.exports = User;
+module.exports = Forms;

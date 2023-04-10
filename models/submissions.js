@@ -2,35 +2,33 @@ const { Sequelize, DataTypes } = require('sequelize');
 
 const sequilize = new Sequelize('mysql://root@localhost:3306/gpt-team')
 
-const User = sequilize.define('User', {
+const Submissions = sequilize.define('Submissions', {
     user_id: {
         type: DataTypes.STRING,
         primaryKey: true,
-        allowNull: false
+        allowNull: false,
+        references: {
+            model: 'User',
+            key: 'user_id',
+          }
+
     },
-    username: {
+    form_id: {
+        type: DataTypes.STRING,
+        primaryKey: true,
+        allowNull: false,
+        references: {
+            model: 'Forms',
+            key: 'form_id'
+          }
+    },
+    uploaded_file: {
         type: DataTypes.STRING,
         allowNull: false
     },
-    email: {
+    description: {
         type: DataTypes.STRING,
         allowNull: false
-    },
-    password: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
-    password: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
-    active: {
-        type: DataTypes.INTEGER,
-        allowNull: false
-    },
-    avatar: {
-        type: DataTypes.STRING,
-        allowNull: true
     },
     created_at: {
         type: DataTypes.DATE,
@@ -43,10 +41,15 @@ const User = sequilize.define('User', {
 
 },
 {
-    tableName: 'users',
+    tableName: 'submissions',
     timestamps: true,
     createdAt: 'created_at',
     updatedAt: 'updated_at'
 })
 
-module.exports = User;
+Submission.associate = (models) => {
+    Submission.belongsTo(models.Form, { foreignKey: 'form_Id' });
+    Submission.belongsTo(models.User, { foreignKey: 'user_Id' });
+    };
+
+module.exports = Submissions;
