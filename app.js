@@ -19,6 +19,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/forms', formsRouter);
-app.use('/submission', submissionsRouter);
+app.use('/submissions', submissionsRouter);
 
 module.exports = app;

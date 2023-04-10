@@ -47,9 +47,9 @@ const Submissions = sequilize.define('Submissions', {
     updatedAt: 'updated_at'
 })
 
-Submission.associate = (models) => {
-    Submission.belongsTo(models.Form, { foreignKey: 'form_Id' });
-    Submission.belongsTo(models.User, { foreignKey: 'user_Id' });
+Submissions.associate = (models) => {
+    Submissions.belongsTo(models.Forms, { foreignKey: 'form_Id' });
+    Submissions.belongsTo(models.User, { foreignKey: 'user_Id' });
     };
 
 module.exports = Submissions;
