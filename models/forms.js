@@ -10,7 +10,11 @@ const Forms = sequilize.define('Forms', {
     },
     user_id: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
+        references: {
+            model: 'User',
+            key: 'user_id'
+          }
     },
     title: {
         type: DataTypes.STRING,
@@ -36,4 +40,7 @@ const Forms = sequilize.define('Forms', {
     createdAt: 'created_at',
     updatedAt: 'updated_at'
 })
+Forms.associate = (models) => {
+    Forms.belongsTo(models.User, { foreignKey: 'user_Id' });
+    };
 module.exports = Forms;
