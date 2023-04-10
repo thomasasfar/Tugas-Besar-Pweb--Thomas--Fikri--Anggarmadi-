@@ -7,6 +7,7 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var formsRouter = require('./routes/forms');
 var submissionsRouter = require('./routes/submission');
+var authRouter = require('./routes/auth');
 
 var app = express();
 
@@ -20,5 +21,6 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/forms', formsRouter);
 app.use('/submissions', submissionsRouter);
+app.use('/auth', authRouter);
 
 module.exports = app;

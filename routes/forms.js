@@ -4,9 +4,10 @@ var router = express.Router();
 var mysql = require('mysql2');
 var Form = require('../models/forms');
 const { listForms, addForms, editForms, deletForms } = require('../controllers/formsController');
+const { authenticateToken, checkUser } = require('../middleware/verifyToken');
 
 /* GET list forms. */
-router.get('/', listForms);
+router.get('/', authenticateToken, listForms);
 
 /* ADD forms. */
 router.post('/', addForms);

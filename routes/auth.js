@@ -1,43 +1,19 @@
-const jwt = require('jsonwebtoken');
-var express = require('express');
-var router = express.Router();
-var mysql = require('mysql2');
-var User = require('../models/users');
+const express = require('express');
+const {signup_get, signup_post, login_get, login_post, logout_get} = require('../controllers/auth1Controller');
+const {authenticateToken} = require('../middleware/verifyToken');
+const cookieParser =  require('cookie-parser');
 
-const dotenv = require('dotenv');
 
-// get config vars
-dotenv.config();
+const router = express.Router();
 
-// access config var
-process.env.TOKEN_SECRET;
+router.use(express.static('public'));
+router.use(express.json()); 
+router.use(cookieParser());
 
-function generateAccessToken(username) {
-  return jwt.sign(username, process.env.TOKEN_SECRET, { expiresIn: '1800s' });
-}
+router.get('/register', signup_get);
+router.post('/register', signup_post);
+router.get('/login', login_get)
+router.post('/login', login_post)
+router.get('/logout', logout_get)
 
-router.post('/api/createNewUser', async function(req, res) {
-  // ...
-
-  const token = generateAccessToken({ username: req.body.username });
-  res.json(token);
-
-  // ...
-});
-
-function authenticateToken(req, res, next) {
-  const authHeader = req.headers['authorization']
-  const token = authHeader && authHeader.split(' ')[1]
-
-  if (token == null) return res.sendStatus(401)
-
-  jwt.verify(token, process.env.TOKEN_LOGIN, (err, user) => {
-    console.log(err)
-
-    if (err) return res.sendStatus(403)
-
-    req.user = user
-
-    next()
-  })
-}
+module.exports = router 
