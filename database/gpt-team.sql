@@ -2,7 +2,7 @@
 -- Host:                         127.0.0.1
 -- Server version:               8.0.30 - MySQL Community Server - GPL
 -- Server OS:                    Win64
--- HeidiSQL Version:             12.4.0.6659
+-- HeidiSQL Version:             12.1.0.6537
 -- --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -13,6 +13,41 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+-- Dumping structure for table gpt-team.forms
+DROP TABLE IF EXISTS `forms`;
+CREATE TABLE IF NOT EXISTS `forms` (
+  `form_id` varchar(50) NOT NULL,
+  `user_id` varchar(50) NOT NULL,
+  `title` varchar(50) NOT NULL,
+  `description` longtext NOT NULL,
+  `created_at` timestamp NOT NULL,
+  `updated_at` timestamp NOT NULL,
+  PRIMARY KEY (`form_id`),
+  KEY `fk_forms_users` (`user_id`),
+  CONSTRAINT `fk_forms_users` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- Dumping data for table gpt-team.forms: ~0 rows (approximately)
+REPLACE INTO `forms` (`form_id`, `user_id`, `title`, `description`, `created_at`, `updated_at`) VALUES
+	('F001', 'U001', 'Fikri Nackal', 'sekarang ada isi', '2023-04-10 12:27:00', '2023-04-10 13:45:25');
+
+-- Dumping structure for table gpt-team.submissions
+DROP TABLE IF EXISTS `submissions`;
+CREATE TABLE IF NOT EXISTS `submissions` (
+  `user_id` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `form_id` varchar(50) NOT NULL,
+  `uploaded_file` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `description` varchar(50) NOT NULL,
+  `created_at` timestamp NOT NULL,
+  `updated_at` timestamp NOT NULL,
+  KEY `fk_submission_forms` (`form_id`),
+  KEY `fk_submission_users` (`user_id`),
+  CONSTRAINT `fk_submission_forms` FOREIGN KEY (`form_id`) REFERENCES `forms` (`form_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_submission_users` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- Dumping data for table gpt-team.submissions: ~0 rows (approximately)
 
 -- Dumping structure for table gpt-team.users
 DROP TABLE IF EXISTS `users`;
