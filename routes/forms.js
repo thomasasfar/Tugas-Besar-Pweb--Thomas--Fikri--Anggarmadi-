@@ -10,12 +10,12 @@ const { authenticateToken, checkUser } = require('../middleware/verifyToken');
 router.get('/', authenticateToken, listForms);
 
 /* ADD forms. */
-router.post('/', addForms);
+router.post('/', authenticateToken, addForms);
 
 /* UPDATE Form. */
-router.post('/:formid/edit', editForms);
+router.post('/:formid/edit', authenticateToken, editForms);
 
 /* DELETE Form. */
-router.post('/:formid/delete', deletForms);
+router.post('/:formid/delete', authenticateToken, deletForms);
 
 module.exports = router;
