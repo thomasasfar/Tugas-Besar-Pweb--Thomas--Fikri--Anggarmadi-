@@ -1,12 +1,14 @@
 var express = require('express');
 var User = require('../models/users');
 
+//list Users
 const listUsers = async function(req, res, next) {
 
     const users = await User.findAll();
     res.json(users);
 }
 
+//add user
 const addUsers = async function(req, res, next) {
   let username = req.body.username;
   let email = req.body.email;
@@ -33,6 +35,8 @@ const addUsers = async function(req, res, next) {
   })
 }
 
+
+// edit user
 const editUsers = async function(req, res, next) {
   let userid = req.params.id;
   let username = req.body.username;
@@ -63,6 +67,7 @@ const editUsers = async function(req, res, next) {
   })
 }
 
+// detele user
 const deleteUsers = async function(req, res, next) {
   let userid = req.params.id;
   
