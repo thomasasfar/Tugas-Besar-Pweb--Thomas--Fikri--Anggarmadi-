@@ -1,0 +1,16 @@
+.ftnav {
+    font-family: 'Fira Sans', sans-serif;
+    font-weight: 400;
+    color: #2D3846;
+    font-size: medium;
+}
+
+.ftheadnav {
+    font-family: 'Fira Sans', sans-serif;
+    font-weight: 600;
+    color: #2D3846;
+}
+
+.warnanav {
+    background-color: #ffffff;
+}
