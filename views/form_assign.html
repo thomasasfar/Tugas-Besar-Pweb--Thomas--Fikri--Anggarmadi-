@@ -47,7 +47,7 @@
     <div class="container ciek mt-5 mb-5 px-5 pt-3 pb-5">
 
     <h3> Form Assignment  </h3>
-    <button type="button" class="btn btn-primary btn-sm ">Add</button>
+    <button type="button" class="btn btn-primary btn-sm " data-bs-target="#add_form" data-bs-toggle="modal">Add</button>
 
     <table cellpadding="10" class="table table-striped">
         <thead>
@@ -67,7 +67,7 @@
                 <td>xxxxxx</td>
                 <td>xxxxxx</td>
                 <td>
-                    <button type="button" class="btn btn-primary btn-sm" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">detail</button>
+                    <button type="button" class="btn btn-primary btn-sm" data-bs-target="#detail_form" data-bs-toggle="modal">detail</button>
                 </td>
             </tr>
             <tr>
@@ -76,7 +76,7 @@
                 <td>xxxxxx</td>
                 <td>xxxxxx</td>
                 <td>
-                    <button type="button" class="btn btn-primary btn-sm">detail</button>
+                    <button type="button" class="btn btn-primary btn-sm" data-bs-target="#detail_form" data-bs-toggle="modal">detail</button>
                 </td>
             </tr>
             <tr>
@@ -85,7 +85,7 @@
                 <td>xxxxxx</td>
                 <td>xxxxxx</td>
                 <td>
-                    <button type="button" class="btn btn-primary btn-sm">detail</button>
+                    <button type="button" class="btn btn-primary btn-sm" data-bs-target="#detail_form" data-bs-toggle="modal">detail</button>
                 </td>
             </tr>
             <tr>
@@ -94,25 +94,70 @@
                 <td>xxxxxx</td>
                 <td>xxxxxx</td>
                 <td>
-                    <button type="button" class="btn btn-primary btn-sm">detail</button>
+                    <button type="button" class="btn btn-primary btn-sm" data-bs-target="#detail_form" data-bs-toggle="modal">detail</button>
                 </td>
             </tr>
         </tbody>
     </table>
 </div>
 
-<div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+<div class="modal fade" id="detail_form" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
           <h1 class="modal-title fs-5" id="exampleModalToggleLabel">Form xxx</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
+          <div class="modal-body">
+            <form>
+              <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">ID Form</label>
+                <h6>F00xxx</h6>
+              </div>
+              <div class="mb-3"> 
+                <label for="exampleInputPassword1" class="form-label">Description</label>
+                <h6>Desc xxxxxx</h6>
+              </div>
+              <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">File Instruction</label><br>
+                <a href=""><button class="btn btn-success btn-sm">DOWNLOAD</button></a>
+              </div>
+              <div class="modal-footer">
+                <button class="btn btn-warning" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">Submission</button>
+                <button class="btn btn-danger" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">Close</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="add_form" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalToggleLabel">Add New Form</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
         <div class="modal-body">
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptatum perspiciatis non natus rerum.
+          <form>
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Header Form</label>
+              <input type="text" placeholder="Form Name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputPassword1" class="form-label">Description</label>
+              <textarea class="form-control" placeholder="Description" name="desc" id="" cols="59" rows="3"></textarea>
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputPassword1" class="form-label">Add File</label>
+              <input type="file" class="form-control" id="exampleInputPassword1">
+            </div>
+          </form>
         </div>
         <div class="modal-footer">
-          <button class="btn btn-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">OK</button>
+          <button class="btn btn-success" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">Add</button>
         </div>
       </div>
     </div>
