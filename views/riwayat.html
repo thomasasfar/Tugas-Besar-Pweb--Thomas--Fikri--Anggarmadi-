@@ -66,7 +66,7 @@
                 <td>xxxxxx</td>
                 <td>xxxxxx</td>
                 <td>
-                    <button type="button" class="btn btn-primary btn-sm">detail</button>
+                    <button type="button" class="btn btn-primary btn-sm" data-bs-target="#riwayat_form" data-bs-toggle="modal">detail</button>
                 </td>
             </tr>
             <tr>
@@ -75,7 +75,7 @@
                 <td>xxxxxx</td>
                 <td>xxxxxx</td>
                 <td>
-                    <button type="button" class="btn btn-primary btn-sm">detail</button>
+                    <button type="button" class="btn btn-primary btn-sm" data-bs-target="#riwayat_form" data-bs-toggle="modal">detail</button>
                 </td>
             </tr>
             <tr>
@@ -84,7 +84,7 @@
                 <td>xxxxxx</td>
                 <td>xxxxxx</td>
                 <td>
-                    <button type="button" class="btn btn-primary btn-sm">detail</button>
+                    <button type="button" class="btn btn-primary btn-sm" data-bs-target="#riwayat_form" data-bs-toggle="modal">detail</button>
                 </td>
             </tr>
             <tr>
@@ -93,13 +93,48 @@
                 <td>xxxxxx</td>
                 <td>xxxxxx</td>
                 <td>
-                    <button type="button" class="btn btn-primary btn-sm">detail</button>
+                    <button type="button" class="btn btn-primary btn-sm" data-bs-target="#riwayat_form" data-bs-toggle="modal">detail</button>
                 </td>
             </tr>
         </tbody>
     </table>
 </div>
 
+<div class="modal fade" id="riwayat_form" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalToggleLabel">Form xxx</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+          <div class="modal-body">
+            <form>
+              <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">ID Form</label>
+                <h6>F00xxx</h6>
+              </div>
+              <div class="mb-3"> 
+                <label for="exampleInputPassword1" class="form-label">Description</label>
+                <h6>Desc xxxxxx</h6>
+              </div>
+              <div class="mb-3"> 
+                <label for="exampleInputPassword1" class="form-label">Uploaded At</label>
+                <h6>xx/xx/xxxx xx:xx</h6>
+              </div>
+              <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Submission</label><br>
+                <a href=""><button class="btn btn-success btn-sm">DOWNLOAD</button></a>
+              </div>
+              <div class="modal-footer">
+                <button class="btn btn-warning" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">Edit</button>
+                <button class="btn btn-danger" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">Close</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
 
 </body>
