@@ -1,6 +1,17 @@
 .kolom {
     background-color: #fff;
-    width: 540px;
+    width: 100%;
     height: 320px;
     border-radius: 4px;
+}
+
+.huruf {
+    font-family: 'Fira Sans', sans-serif;
+    font-weight: 400;
+    color: #2D3846;
+    font-size: medium
+}
+
+.tinggi {
+    height: 280px;
 }
