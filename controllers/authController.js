@@ -50,11 +50,11 @@ const handleErrors = (err) => {
 };
 
 // create json web token
-const maxAge = 3 * 24 * 60 * 60;
+const maxAge = 10 * 60;
 dotenv.config();
 let secret = process.env.TOKEN_LOGIN;
-const createToken = (id, type) => {
-  return jwt.sign({ id, type }, secret, {
+const createToken = (id) => {
+  return jwt.sign({ id }, secret, {
     expiresIn: maxAge,
   });
 };
@@ -69,21 +69,26 @@ const login_get = (req, res) => {
 
 const signup_post = async (req, res) => {
   const { username, email, password, confPassword } = req.body;
-  if (password !== confPassword) return res.status(400).json({ msg: "Password dan Confirm Password tidak cocok" });
+  if (password !== confPassword)
+    return res
+      .status(400)
+      .json({ msg: "Password dan Confirm Password tidak cocok" });
   const salt = await bcrypt.genSalt();
   const hashPassword = await bcrypt.hash(password, salt);
 
-  const usernameExist = await users.findOne({ where: { username: req.body.username } });
+  const usernameExist = await users.findOne({
+    where: { username: req.body.username },
+  });
   if (usernameExist) return res.status(400).send("username sudah dipakai");
 
   try {
     await users.create({
-        user_id: 'U005',
-        username: username,
-        email: email,
-        password: password,
-        active: 1
-      })
+      user_id: "U005",
+      username: username,
+      email: email,
+      password: hashPassword,
+      active: 1,
+    });
     res.redirect("/auth/login");
   } catch (err) {
     const errors = handleErrors(err);
@@ -98,34 +103,14 @@ const login_post = async (req, res) => {
     if (!user) return res.status(400).send("username tidak ditemukan");
 
     // Cek Password
-    const validPass = await users.findOne({ where: { password: req.body.password } });
-    // const validPass = await bcrypt.compare(req.body.password, user.password);
+    const validPass = await bcrypt.compare(req.body.password, user.password);
     if (!validPass) return res.status(400).send("Password Salah");
 
-    let today = new Date();
-    let date = today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
-    let time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-    let dateTime = date + " " + time;
+    const token = createToken(user.id);
 
-    const token = createToken(user.id, user.type);
-    const type = user.type;
-
-    await users.update(
-      {
-        remember_token: token,
-        username_verified_at: dateTime,
-      },
-      {
-        where: { username: req.body.username },
-      }
-    );
-
-    res.cookie("jwt", token, { httpOnly: true, maxAge: maxAge * 1000 }).cookie("type", type, {
-      httpOnly: true,
-      maxAge: 24 * 60 * 60 * 1000,
-    });
-    res.status(200).json({ user: user.user_id });
-    // res.redirect('/')
+    res
+      .status(200)
+      .json({ user: user.user_id, token: token, pesan: "login sukses" });
   } catch (err) {
     const errors = handleErrors(err);
     res.status(400).json({ errors });
@@ -133,9 +118,6 @@ const login_post = async (req, res) => {
 };
 
 const logout_get = (req, res) => {
-  res.cookie("jwt", "", { maxAge: 1 });
-  res.cookie("type", "", { maxAge: 1 });
-  // res.clearCookie('jwt');
   res.redirect("/auth/login");
 };
 
