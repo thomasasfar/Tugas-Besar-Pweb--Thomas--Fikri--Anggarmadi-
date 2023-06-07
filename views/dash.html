@@ -111,5 +111,36 @@
       integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
       crossorigin="anonymous"
     ></script>
+
+    <script>
+      const logout = document.getElementById("logout");
+
+      logout.addEventListener("click", (e) => {
+        e.preventDefault();
+        var myHeaders = new Headers();
+        myHeaders.append(
+          "Authorization",
+          "Bearer 288fb3a37e93f0feda6e44c935b6431122811cda9175cdf52be9f320a7eaff4b2533824b6d91e4cc038699b286ae93bdf814c613dc34ccef0065e8a0274dc793"
+        );
+
+        var urlencoded = new URLSearchParams();
+
+        var requestOptions = {
+          method: "GET",
+          headers: myHeaders,
+          redirect: "follow",
+        };
+
+        fetch("http://localhost:3000/auth/logout", requestOptions)
+          .then(function (res) {
+            if (res.status === 200) {
+              window.location.replace("login.html");
+            }
+            return res.json();
+          })
+          .then((result) => console.log(result))
+          .catch((error) => console.log("error", error));
+      });
+    </script>
   </body>
 </html>
