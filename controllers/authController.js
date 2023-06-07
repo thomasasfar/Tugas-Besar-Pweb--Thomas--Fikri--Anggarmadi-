@@ -6,11 +6,11 @@ const bcrypt = require("bcrypt");
 const login = async function (username, password) {
   const user = await users.findOne({ where: { username: username } });
   if (user) {
-    const auth = await users.findOne({ where: { password: password } });
-    if (auth) {
-      return user;
-    }
-    throw Error("incorrect password");
+    // const auth = await users.findOne({ where: { password: password } });
+    // if (auth) {
+    return user;
+    // }
+    // throw Error("incorrect password");
   }
   throw Error("incorrect username");
 };
@@ -83,7 +83,7 @@ const signup_post = async (req, res) => {
 
   try {
     await users.create({
-      user_id: "U005",
+      user_id: "U003",
       username: username,
       email: email,
       password: hashPassword,
