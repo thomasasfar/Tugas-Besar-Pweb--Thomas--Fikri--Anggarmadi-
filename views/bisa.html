@@ -13,9 +13,31 @@
 
     <script>
       const oke = document.getElementById("oke");
-      oke.onclick = function () {
-        alert("Yok Bisa YOK");
-      };
+      oke.addEventListener("click", (e) => {
+        e.preventDefault();
+        var myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+        myHeaders.append(
+          "Authorization",
+          "Bearer 288fb3a37e93f0feda6e44c935b6431122811cda9175cdf52be9f320a7eaff4b2533824b6d91e4cc038699b286ae93bdf814c613dc34ccef0065e8a0274dc793"
+        );
+
+        var urlencoded = new URLSearchParams();
+        urlencoded.append("username", "irsyad");
+        urlencoded.append("password", "123");
+
+        var requestOptions = {
+          method: "POST",
+          headers: myHeaders,
+          body: urlencoded,
+          redirect: "follow",
+        };
+
+        fetch("http://localhost:3000/auth/login", requestOptions)
+          .then((response) => response.text())
+          .then((result) => console.log(result))
+          .catch((error) => console.log("error", error));
+      });
     </script>
   </body>
 </html>
