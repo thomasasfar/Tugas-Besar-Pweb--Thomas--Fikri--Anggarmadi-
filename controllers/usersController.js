@@ -11,10 +11,12 @@ const listUsers = async function (req, res, next) {
 
 // edit user
 const editUsers = async function (req, res, next) {
-  let userid = req.params.id;
+  let userid = req.session.id;
   let username = req.body.username;
   let email = req.body.email;
   let password = req.body.password;
+  const salt = await bcrypt.genSalt();
+  const hashPassword = await bcrypt.hash(password, salt);
   let active = req.body.active;
   let avatar = req.body.avatar;
 
@@ -22,7 +24,7 @@ const editUsers = async function (req, res, next) {
     {
       username: username,
       email: email,
-      password: password,
+      password: hashPassword,
       active: active,
       avatar: avatar,
     },
