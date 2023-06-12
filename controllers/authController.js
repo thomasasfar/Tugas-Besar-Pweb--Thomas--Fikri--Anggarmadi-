@@ -6,11 +6,7 @@ const bcrypt = require("bcrypt");
 const login = async function (username, password) {
   const user = await users.findOne({ where: { username: username } });
   if (user) {
-    // const auth = await users.findOne({ where: { password: password } });
-    // if (auth) {
     return user;
-    // }
-    // throw Error("incorrect password");
   }
   throw Error("incorrect username");
 };
@@ -50,7 +46,7 @@ const handleErrors = (err) => {
 };
 
 // create json web token
-const maxAge = 10 * 60;
+const maxAge = 3 * 24 * 60 * 60;
 dotenv.config();
 let secret = process.env.TOKEN_LOGIN;
 const createToken = (id) => {
@@ -83,7 +79,6 @@ const signup_post = async (req, res) => {
 
   try {
     await users.create({
-      user_id: "U003",
       username: username,
       email: email,
       password: hashPassword,
@@ -108,9 +103,15 @@ const login_post = async (req, res) => {
 
     const token = createToken(user.id);
 
+    req.session.user_id = user.user_id;
+    res.cookie("jwt", token, {
+      httpOnly: true,
+      maxAge: 24 * 60 * 60 * 1000,
+    });
+
     res
       .status(200)
-      .json({ user: user.user_id, token: token, pesan: "login sukses" });
+      .json({ user: req.session.user_id, token: token, pesan: "login sukses" });
   } catch (err) {
     const errors = handleErrors(err);
     res.status(400).json({ errors });
@@ -118,6 +119,7 @@ const login_post = async (req, res) => {
 };
 
 const logout_get = (req, res) => {
+  res.cookie("jwt", "", { maxAge: 1 });
   res.redirect("/auth/login");
 };
 

@@ -4,8 +4,9 @@ const users = require("../models/users");
 dotenv.config();
 
 function authenticateToken(req, res, next) {
-  const authHeader = req.headers["authorization"];
-  const token = authHeader && authHeader.split(" ")[1];
+  // const authHeader = req.headers["authorization"];
+  // const token = authHeader && authHeader.split(" ")[1];
+  const token = req.cookies.jwt;
 
   if (token == null) return res.status(401).send(`Akses ditolak`);
 

@@ -1,5 +1,6 @@
 var express = require("express");
 var Form = require("../models/forms");
+const { Op } = require("sequelize");
 
 function buatPin(length) {
   const charList =
@@ -15,12 +16,40 @@ function buatPin(length) {
 }
 
 const listForms = async function (req, res, next) {
-  const forms = await Form.findAll();
+  const forms = await Form.findAll({
+    attributes: ["form_id", "title", "description", "created_at", "updated_at"],
+  });
+  res.json(forms);
+};
+
+const listFormsMe = async function (req, res, next) {
+  const user_id = req.session.user_id;
+  const forms = await Form.findAll({
+    attributes: ["form_id", "title", "description", "created_at", "updated_at"],
+    where: {
+      user_id: user_id,
+    },
+  });
+  res.json(forms);
+};
+
+const listFormsAll = async function (req, res, next) {
+  const user_id = req.session.user_id;
+  const forms = await Form.findAll({
+    attributes: ["form_id", "title", "description", "created_at", "updated_at"],
+    where: {
+      [Op.not]: [
+        {
+          user_id: user_id,
+        },
+      ],
+    },
+  });
   res.json(forms);
 };
 
 const addForms = async function (req, res, next) {
-  let user_id = req.body.user_id;
+  let user_id = req.session.user_id;
   let form_id = buatPin(8);
   let title = req.body.title;
   let description = req.body.description;
@@ -35,6 +64,7 @@ const addForms = async function (req, res, next) {
     .then((response) => {
       res.json({
         message: "Data Berhasil Ditambahkan, pin Anda " + form_id,
+        pin: form_id,
       });
     })
     .catch((err) => {
@@ -43,7 +73,7 @@ const addForms = async function (req, res, next) {
 };
 
 const editForms = async function (req, res, next) {
-  // let user_id = req.params.id;
+  let user_id = req.session.user_id;
   let form_id = req.params.formid;
   let title = req.body.title;
   let description = req.body.description;
@@ -56,7 +86,7 @@ const editForms = async function (req, res, next) {
     {
       where: {
         form_id: form_id,
-        // user_id: user_id
+        user_id: user_id,
       },
     }
   )
@@ -90,4 +120,11 @@ const deletForms = async function (req, res, next) {
     });
 };
 
-module.exports = { listForms, addForms, editForms, deletForms };
+module.exports = {
+  listForms,
+  listFormsMe,
+  listFormsAll,
+  addForms,
+  editForms,
+  deletForms,
+};
