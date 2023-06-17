@@ -3,8 +3,9 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 var cors = require("cors");
+const dotenv = require("dotenv");
 var session = require("express-session");
-
+dotenv.config();
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
 var formsRouter = require("./routes/forms");
@@ -15,7 +16,7 @@ var app = express();
 
 app.use(
   session({
-    secret: "ACCESS_TOKEN_SECRET",
+    secret: process.env.TOKEN_LOGIN,
     resave: false,
     saveUninitialized: true,
   })
