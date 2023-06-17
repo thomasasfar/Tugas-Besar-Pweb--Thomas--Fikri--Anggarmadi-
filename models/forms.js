@@ -45,7 +45,7 @@ const Forms = sequilize.define(
 Forms.prototype.getFormattedUpdatedAt = function() {
     const updatedDate = this.updated_at;
     return new Date(updatedDate).toLocaleDateString('id-ID', { day: '2-digit', month: '2-digit', year: 'numeric' });
-};
+};//format tanggal
 Forms.associate = (models) => {
   Forms.belongsTo(models.User, { foreignKey: "user_Id" });
 };
