@@ -147,10 +147,10 @@
                 method: 'GET',
                 headers: myHeaders,
                 body: urlencoded,
-                redirect: 'follow'
+                redirect: 'follow'//header
               };
 
-              const url = await fetch('http://localhost:3000/forms',requestOptions);
+              const url = await fetch('http://localhost:3000/forms', requestOptions);
               usersData = await url.json();
               console.log(usersData)
               loadUserData(usersData);
