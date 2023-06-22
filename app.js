@@ -7,6 +7,7 @@ const dotenv = require("dotenv");
 var session = require("express-session");
 dotenv.config();
 var indexRouter = require("./routes/index");
+var bodyParser = require("body-parser");
 var usersRouter = require("./routes/users");
 var formsRouter = require("./routes/forms");
 var submissionsRouter = require("./routes/submission");
@@ -21,6 +22,8 @@ app.use(
     saveUninitialized: true,
   })
 );
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 app.use(cors());
 app.use(logger("dev"));
 app.use(express.json());
