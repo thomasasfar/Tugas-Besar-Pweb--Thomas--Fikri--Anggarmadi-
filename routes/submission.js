@@ -2,6 +2,7 @@ const jwt = require("jsonwebtoken");
 var express = require("express");
 var router = express.Router();
 var mysql = require("mysql2");
+
 // var Subs = require('../models/submissions');
 const Submissions = require("../models/submissions");
 const {
@@ -11,12 +12,12 @@ const {
   deleteSubmissions,
   riwayatSubmissions,
 } = require("../controllers/submissionController");
-const { authenticateToken } = require("../middleware/verifyToken");
 
 const multer = require("multer");
+const { authenticateToken } = require("../middleware/verifyToken");
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, "./files_upload/");
+    cb(null, "./assets/files_upload/");
   },
   filename: (req, file, cb) => {
     console.log(file);
