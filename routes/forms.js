@@ -14,7 +14,7 @@ const {
 const { authenticateToken } = require("../middleware/verifyToken");
 
 /* GET list forms. */
-router.get("/", authenticateToken, listForms);
+router.get("/", /*authenticateToken,*/ listForms);
 
 /* GET my list forms. */
 router.get("/formMe", authenticateToken, listFormsMe);

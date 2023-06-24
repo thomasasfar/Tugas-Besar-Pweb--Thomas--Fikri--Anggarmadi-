@@ -12,20 +12,34 @@ const listUsers = async function (req, res, next) {
 
 // edit user
 const editUsers = async function (req, res, next) {
-  let userid = req.session.id;
+  const users = await User.findAll({
+    where: {
+      user_id: req.session.user_id,
+    },
+  });
+  let userid = req.session.user_id;
   let username = req.body.username;
   let email = req.body.email;
-  let password = req.body.password;
-  const salt = await bcrypt.genSalt();
-  const hashPassword = await bcrypt.hash(password, salt);
   let active = req.body.active;
-  let avatar = req.body.avatar;
+  console.log(req.file);
+  if (username == "") {
+    username = users.username;
+  }
+  if (email == "") {
+    email = users.email;
+  }
+  if (req.file == undefined) {
+    avatar = users.avatar;
+  } else {
+    avatar = req.file.path;
+  }
+
+  console.log("Avatar :", avatar);
 
   await User.update(
     {
       username: username,
       email: email,
-      password: hashPassword,
       active: active,
       avatar: avatar,
     },

@@ -22,12 +22,12 @@ const addSubmissions = async function (req, res, next) {
   // console.log(req.file);
   let user_id = req.session.user_id;
   let form_id = req.body.form_id;
-  let uploaded_file = req.file;
+  let uploaded_file = req.file.path;
   let description = req.body.description;
   await Submissions.create({
     user_id: user_id,
     form_id: form_id,
-    uploaded_file: uploaded_file.path,
+    uploaded_file: uploaded_file,
     description: description,
   })
     .then((response) => {
