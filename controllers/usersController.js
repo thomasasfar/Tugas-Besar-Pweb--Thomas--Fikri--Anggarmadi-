@@ -1,5 +1,6 @@
 var express = require("express");
 var User = require("../models/users");
+const bcrypt = require("bcrypt");
 
 //list Users
 const listUsers = async function (req, res, next) {
@@ -45,4 +46,37 @@ const editUsers = async function (req, res, next) {
     });
 };
 
-module.exports = { listUsers, editUsers };
+const editPassword = async function (req, res, next) {
+  let userid = req.session.user_id;
+  let newPassword = req.body.newPassword;
+  let confPassword = req.body.confPassword;
+  if (newPassword !== confPassword)
+    return res
+      .status(400)
+      .json({ msg: "Password dan Confirm Password tidak cocok" });
+
+  const salt = await bcrypt.genSalt();
+  const hashPassword = await bcrypt.hash(newPassword, salt);
+
+  await User.update(
+    {
+      password: hashPassword,
+    },
+    {
+      where: {
+        user_id: userid,
+      },
+    }
+  )
+
+    .then((response) => {
+      res.json({
+        message: "Password Berhasil Diganti",
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+module.exports = { listUsers, editUsers, editPassword };

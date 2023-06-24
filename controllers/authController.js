@@ -119,7 +119,7 @@ const login_post = async (req, res) => {
 };
 
 const logout_get = (req, res) => {
-  // res.clearCookie();
+  res.clearCookie("jwt");
   // res.cookie("jwt", "", { maxAge: 1 });
   res.redirect("/auth/login");
 };

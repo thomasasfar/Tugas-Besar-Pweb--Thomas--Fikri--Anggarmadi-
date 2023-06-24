@@ -11,7 +11,7 @@ const {
   listFormsMe,
   listFormsAll,
 } = require("../controllers/formsController");
-const { authenticateToken, checkUser } = require("../middleware/verifyToken");
+const { authenticateToken } = require("../middleware/verifyToken");
 
 /* GET list forms. */
 router.get("/", authenticateToken, listForms);

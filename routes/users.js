@@ -4,15 +4,17 @@ var mysql = require("mysql2");
 var User = require("../models/users");
 const {
   listUsers,
-  addUsers,
   editUsers,
-  deleteUsers,
+  editPassword,
 } = require("../controllers/usersController");
 
 /* GET users listing. */
 router.get("/", listUsers);
 
 /* UPDATE user. */
-router.post("/:id/edit", editUsers);
+router.post("/edit", editUsers);
+
+/* UPDATE user. */
+router.post("/editPassword", editPassword);
 
 module.exports = router;
