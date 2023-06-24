@@ -88,41 +88,37 @@
       integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
       crossorigin="anonymous"
     ></script>
+
     <script>
       const login = document.getElementById("login");
-      login.addEventListener("submit", (e) => {
+      login.addEventListener("submit", async (e) => {
         e.preventDefault();
+
+        // reset errors
         username = document.getElementById("username").value;
         password = document.getElementById("password").value;
-        console.log(username, password);
 
-        var myHeaders = new Headers();
-        myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
-        myHeaders.append(
-          "Authorization",
-          "Bearer 288fb3a37e93f0feda6e44c935b6431122811cda9175cdf52be9f320a7eaff4b2533824b6d91e4cc038699b286ae93bdf814c613dc34ccef0065e8a0274dc793"
-        );
-
-        var urlencoded = new URLSearchParams();
-        urlencoded.append("username", username);
-        urlencoded.append("password", password);
-
-        var requestOptions = {
-          method: "POST",
-          headers: myHeaders,
-          body: urlencoded,
-          redirect: "follow",
-        };
-
-        fetch("http://localhost:3000/auth/login", requestOptions)
-          .then(function (res) {
-            if (res.status === 200) {
-              window.location.replace("dash.html");
-            }
-            return res.json();
-          })
-          .then((result) => sessionStorage.setItem("token", result["token"]))
-          .catch((error) => console.log("error", error));
+        try {
+          const res = await fetch("http://localhost:3000/auth/login", {
+            method: "POST",
+            body: JSON.stringify({ username, password }),
+            headers: { "Content-Type": "application/json" },
+          });
+          const data = await res.json();
+          console.log(data);
+          console.log(data);
+          if (data.errors) {
+            username.textContent = data.errors.username;
+            passwordError.textContent = data.errors.password;
+          }
+          if (data.user) {
+            sessionStorage.setItem("token", data["token"]);
+            sessionStorage.setItem("user_id", data["user"]);
+            location.assign("./dash.html");
+          }
+        } catch (err) {
+          console.log(err);
+        }
       });
     </script>
   </body>

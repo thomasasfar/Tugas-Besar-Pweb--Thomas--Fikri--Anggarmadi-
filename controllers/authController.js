@@ -104,19 +104,14 @@ const login_post = async (req, res) => {
     const token = createToken(user.id);
 
     req.session.user_id = user.user_id;
-    // res.cookie("jwt", token, {
-    //   httpOnly: true,
-    //   maxAge: 24 * 60 * 60 * 1000,
-    // });
+    res.cookie("jwt", token);
 
-    res
-      .status(200)
-      .json({
-        user: req.session.user_id,
-        token: token,
-        pesan: "login sukses",
-        expiresIn: "3 hari",
-      });
+    res.status(200).json({
+      user: req.session.user_id,
+      token: token,
+      pesan: "login sukses",
+      expiresIn: "3 hari",
+    });
   } catch (err) {
     const errors = handleErrors(err);
     res.status(400).json({ errors });

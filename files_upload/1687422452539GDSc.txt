@@ -1,0 +1,38 @@
+What is your motivation to run a Google Developer Student Club at your Institution?
+==> Motivasi saya untuk menjalankan GDSC di kampus saya sederhana, saya ingin kampus saya memiliki
+sebuah komunitas berbasis teknologi yang memfasilitasi seluruh masahsiswa di dalamnya
+agar mengenal teknologi dengan baik. Karena pembelajaran yang didapatkan di kampus hanya berupa teori saja
+dengan ada komunitas akan memperluas relasi antar kampus hingga manca negara untuk saling bertukar pikiran 
+memberikan ide ide baru dan tentunya sebuah permasalahan nyata yang harus diselesaikan. Sehingga mahasiswa
+bisa menyelesaikan permasalahan tersebut yang tidak melulu soal teori saja. 
+Dengan terbentuknya GDSC saya yakin akan memaksimalkan potensi yang saya dan mahasiswa di kampus saya miliki
+karena semakin luasnya wawasan yang dapat diterima apabila bergabung dengan GDSC. Karena pada dasarnya
+praktek menyelesaikan suatu masalah adalah cara terbaik untuk menjadi ahli dibidang tersebut dan GDSC memfasilitasi itu.
+Oleh karena itu saya sangat termotivasi untuk menjalankan GDSC di kampus saya.
+
+What is your experience in leading a project or a team?
+==> Berbicara soal projek, karena saya berada di tingkat dua di kampus saya saat ini, banyak sekali 
+mata kuliah yang dikerjakan berbasis projek. Salah satu yang baru baru ini saya dan tim saya selesaikan
+adalah kami membangun sebuah aplikasi yang memanfaatkan pembelajaran mesin yang mampu memberikan notifikasi
+apabila terdapat orang yang tidak dikenali tertangkap oleh kamera. Projek yang dikerjakan berbasi deeplearning 
+menggunakan algoritma CNN dalam mengenali wajah. Selain itu saya juga mengikuti kegiatan magang untuk menjadi 
+asisten lab di kampus saya. Dalam perjalanan magang saya diberikan beberapa projek sebagai penilian kalayakan
+saya untuk menjadi asisten di lab tersebut. Salah satu projek yang saya kerjakan bersama tim dalam kegiatan magang tersebut
+adalah kami membangun sebuah model yang memanfaatkan dataset yang diberikan untuk memprediksi pendapaan seseorang berdasarkan 
+beberapa kriteria yang diberikan.
+
+What developer technology do you find most interesting and why?
+==> teknologi yang paling menarik bagi saya adalah artificial intelegence. Seperti yang kita ketahui saat ini 
+sangat marak sekali kecerdasan buatan dan saya melihat semua ini sebagai sebuah peluang, karena masih sedikit
+orang yang benar benar memahami kecerdasan buatan itu. Oleh karena itu saya tertarik dengan kecerdasan buatan.
+
+How have you shared your experiences with technology products and platforms with others?
+==> Cara saya membagikan pengalaman saya kepada yang lain adalah mengajarkan kemampuan yang saya miliki berkaitan dengan
+teknologi kepada teman teman saya. Karena saya yakin cara untuk menjadi ahli di bidang tertentu adalah dengan cara mengajarkannya
+dengan begitu saya yang mempelajari lebih dalam sebelum saya membagikannya kepada yang lain.
+
+In what ways are your academic studies integrating/exploring technology?
+==> Dikampus saya menerapkan Project Based Learning, dimana dosen di kampus saya memberikan sebuah projek kepada mahasiswa
+untuk dikerjakan secara tim. Salah satu contoh projek yang sedang berjalan di tingkat saya adalah Membangun sebuah website 
+berbasi javascript yang merupakan projek dari mata kuliah pemrograman web. Pada projek ini kami berkeja sama tim untuk 
+membangun sebuah web yang antara frontend dan backend nya saling bertukar data dengan format Json.

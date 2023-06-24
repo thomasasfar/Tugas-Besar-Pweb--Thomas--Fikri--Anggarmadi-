@@ -133,23 +133,27 @@
 
 
     <script>
+      const jwt = sessionStorage.getItem("token");
+      const user_id = sessionStorage.getItem("user_id");
       const tbody = document.querySelector('tbody')
       let usersData = [];
 
       const loadData = async () => {
           try {
-              var myHeaders = new Headers();
-              myHeaders.append("Cookie", "connect.sid=s%3APAvproUVyR0hQpSbBh1pkpgNdvL_LP_A.gxYUHYGdMrjemoGqsqV4T%2BwoO73LWdtRU0NaDToIJys; jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2ODY1ODM4MzMsImV4cCI6MTY4Njg0MzAzM30.D7zZ8rMrmwjAj4RDkdURs7m9pmv10FmLqHqPy3uV48w");
+            
+            console.log("Jwt: ",jwt)
+            console.log("user: ",user_id)
+            var myHeaders = new Headers();
+            myHeaders.append("Authorization", "Bearer "+ jwt);
+            // myHeaders.append("Cookie", "connect.sid=s%3AKpb23T5z5fJmAsg4xTtYQtpRqh43b2mb.NgYTTM1EXhcPbjo39Qv8G92KASUnom5b96yMu%2Bu%2BClI");
 
-              var urlencoded = new URLSearchParams();
 
-              var requestOptions = {
-                method: 'GET',
-                headers: myHeaders,
-                body: urlencoded,
-                redirect: 'follow'//header
-              };
+            var requestOptions = {
+              method: 'GET',
+              headers: myHeaders,
+              redirect: 'follow',
 
+            };
               const url = await fetch('http://localhost:3000/forms', requestOptions);
               usersData = await url.json();
               console.log(usersData)

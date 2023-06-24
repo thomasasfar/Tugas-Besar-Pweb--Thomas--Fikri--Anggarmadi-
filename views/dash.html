@@ -135,6 +135,7 @@
           .then(function (res) {
             if (res.status === 200) {
               window.location.replace("login.html");
+              sessionStorage.clear();
             }
             return res.json();
           })

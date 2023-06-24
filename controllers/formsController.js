@@ -23,7 +23,7 @@ const listForms = async function (req, res, next) {
 };
 
 const listFormsMe = async function (req, res, next) {
-  const user_id = req.session.user_id;
+  const user_id = req.body.user_id;
   const forms = await Form.findAll({
     attributes: ["form_id", "title", "description", "created_at", "updated_at"],
     where: {
