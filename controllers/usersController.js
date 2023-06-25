@@ -93,4 +93,17 @@ const editPassword = async function (req, res, next) {
     });
 };
 
-module.exports = { listUsers, editUsers, editPassword };
+//list Users
+const profileMe = async function (req, res, next) {
+  const user_id = req.session.user_id;
+  const users = await User.findAll({
+    attributes: ["username", "email", "active", "avatar"],
+
+    where: {
+      user_id: user_id,
+    },
+  });
+  res.json(users);
+};
+
+module.exports = { listUsers, editUsers, editPassword, profileMe };

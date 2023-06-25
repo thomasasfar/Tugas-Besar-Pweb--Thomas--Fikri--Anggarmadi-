@@ -7,6 +7,7 @@ const {
   listUsers,
   editUsers,
   editPassword,
+  profileMe,
 } = require("../controllers/usersController");
 
 const multer = require("multer");
@@ -31,6 +32,9 @@ const upload = multer({ storage: storage });
 
 /* GET users listing. */
 router.get("/", listUsers);
+
+/* GET users listing. */
+router.get("/profile", profileMe);
 
 /* UPDATE user. */
 router.post("/edit", upload.single("avatar"), editUsers);

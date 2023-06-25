@@ -98,10 +98,39 @@ const deleteSubmissions = async function (req, res, next) {
     });
 };
 
+const downloadFile = async function (req, res, next) {
+  const fileName = req.params.filename;
+  const filePath = __dirname + "/uploads/" + fileName;
+
+  res.download(filePath, function (err) {
+    if (err) {
+      // Tangani kesalahan jika terjadi
+      console.log(err);
+      res.status(404).send("File tidak ditemukan");
+    }
+  });
+  //req id form
+  form_id = req.params.formId;
+
+  const forms = await Submissions.findAll({
+    attributes: ["uploaded_file"],
+    where: {
+      form_id: form_id,
+    },
+  });
+  const file = forms;
+  res.json(forms);
+  res.sendFile(
+    "D:\\Me\\PWEB\\Gpt\\Tugas-Besar-Pweb--Thomas--Fikri--Anggarmadi-\\assets\\files_upload\\1687422452539GDSc.txt"
+  );
+  console.log("HasilNya", file);
+};
+
 module.exports = {
   listSubmissions,
   riwayatSubmissions,
   addSubmissions,
   editSubmissions,
   deleteSubmissions,
+  downloadFile,
 };

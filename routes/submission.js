@@ -11,6 +11,7 @@ const {
   editSubmissions,
   deleteSubmissions,
   riwayatSubmissions,
+  downloadFile,
 } = require("../controllers/submissionController");
 
 const { authenticateToken } = require("../middleware/verifyToken");
@@ -29,6 +30,9 @@ const upload = multer({ storage: storage });
 
 /* GET list submissions. */
 router.get("/", authenticateToken, listSubmissions);
+
+/* GET list submissions. */
+router.get("/download/:formId", /*authenticateToken,*/ downloadFile);
 
 /* GET list submissions. */
 router.get("/riwayat", authenticateToken, riwayatSubmissions);

@@ -23,40 +23,45 @@ const listForms = async function (req, res, next) {
 
   const page = parseInt(req.query.page) || 0;
   const limit = parseInt(req.query.limit) || 10;
-  const search = req.query.search_query || "";
   const offset = limit * page;
   const totalRows = await Form.count({
     where: {
-      [Op.or]: [
-        {
-          title: {
-            [Op.like]: "%" + search + "%",
-          },
-        },
-        {
-          description: {
-            [Op.like]: "%" + search + "%",
-          },
-        },
-      ],
+      user_id: "1",
     },
+    // where: {
+    //   [Op.or]: [
+    //     {
+    //       title: {
+    //         [Op.like]: "%" + search + "%",
+    //       },
+    //     },
+    //     {
+    //       description: {
+    //         [Op.like]: "%" + search + "%",
+    //       },
+    //     },
+    //   ],
+    // },
   });
   const totalPage = Math.ceil(totalRows / limit);
   const result = await Form.findAll({
     where: {
-      [Op.or]: [
-        {
-          title: {
-            [Op.like]: "%" + search + "%",
-          },
-        },
-        {
-          description: {
-            [Op.like]: "%" + search + "%",
-          },
-        },
-      ],
+      user_id: "1",
     },
+    // where: {
+    //   [Op.or]: [
+    //     {
+    //       title: {
+    //         [Op.like]: "%" + search + "%",
+    //       },
+    //     },
+    //     {
+    //       description: {
+    //         [Op.like]: "%" + search + "%",
+    //       },
+    //     },
+    //   ],
+    // },
     offset: offset,
     limit: limit,
     order: [["updated_at", "ASC"]],
@@ -72,13 +77,38 @@ const listForms = async function (req, res, next) {
 
 const listFormsMe = async function (req, res, next) {
   const user_id = req.session.user_id;
-  const forms = await Form.findAll({
-    attributes: ["form_id", "title", "description", "created_at", "updated_at"],
+  // const forms = await Form.findAll({
+  //   attributes: ["form_id", "title", "description", "created_at", "updated_at"],
+  //   where: {
+  //     user_id: user_id,
+  //   },
+  // });
+  // res.json(forms);
+  const page = parseInt(req.query.page) || 0;
+  const limit = parseInt(req.query.limit) || 10;
+  const offset = limit * page;
+  const totalRows = await Form.count({
     where: {
       user_id: user_id,
     },
   });
-  res.json(forms);
+  const totalPage = Math.ceil(totalRows / limit);
+  const result = await Form.findAll({
+    where: {
+      user_id: user_id,
+    },
+
+    offset: offset,
+    limit: limit,
+    order: [["updated_at", "ASC"]],
+  });
+  res.json({
+    result: result,
+    page: page,
+    limit: limit,
+    totalRows: totalRows,
+    totalPage: totalPage,
+  });
 };
 
 const listFormsAll = async function (req, res, next) {
