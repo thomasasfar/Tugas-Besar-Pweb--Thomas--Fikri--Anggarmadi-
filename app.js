@@ -14,6 +14,7 @@ var formsRouter = require("./routes/forms");
 var submissionsRouter = require("./routes/submission");
 var authRouter = require("./routes/auth");
 const User = require("./models/users");
+const { authenticateToken } = require("./middleware/verifyToken");
 
 var app = express();
 
@@ -40,7 +41,7 @@ app.use("/forms", formsRouter);
 app.use("/submissions", submissionsRouter);
 app.use("/auth", authRouter);
 
-app.get("/download/:fileName", function (req, res) {
+app.get("/download/:fileName", authenticateToken, function (req, res) {
   const fileName = req.params.fileName;
   const filePath = __dirname + "/assets/files_upload/" + fileName;
   // const filePath = __dirname + "/assets/avatar/" + fileName;

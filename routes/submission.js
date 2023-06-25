@@ -2,6 +2,7 @@ const jwt = require("jsonwebtoken");
 var express = require("express");
 var router = express.Router();
 var mysql = require("mysql2");
+const path = require("path");
 
 // var Subs = require('../models/submissions');
 const Submissions = require("../models/submissions");
@@ -26,7 +27,18 @@ const storage = multer.diskStorage({
   },
 });
 
-const upload = multer({ storage: storage });
+const fileFilter = function (req, file, cb) {
+  const allowedExtensions = [".pdf"];
+  const fileExtension = path.extname(file.originalname);
+
+  if (allowedExtensions.includes(fileExtension)) {
+    cb(null, true);
+  } else {
+    cb(new Error("Hanya file PDF yang diperbolehkan!"), false);
+  }
+};
+
+const upload = multer({ storage: storage, fileFilter: fileFilter });
 
 /* GET list submissions. */
 router.get("/", authenticateToken, listSubmissions);

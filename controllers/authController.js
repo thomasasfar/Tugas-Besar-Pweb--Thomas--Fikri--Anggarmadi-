@@ -120,9 +120,21 @@ const login_post = async (req, res) => {
 };
 
 const logout_get = (req, res) => {
-  res.clearCookie("jwt");
-  // res.cookie("jwt", "", { maxAge: 1 });
-  res.redirect("/auth/login");
+  req.session.destroy((err) => {
+    if (err) {
+      console.log(err);
+      return res.status(400).json({
+        success: false,
+        msg: "Cant logout",
+      });
+    }
+
+    res.clearCookie("jwt");
+    return res.status(200).json({
+      success: true,
+      msg: "Logout berhasil",
+    });
+  });
 };
 
 module.exports = {
