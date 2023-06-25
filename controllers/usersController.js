@@ -20,7 +20,7 @@ const editUsers = async function (req, res, next) {
   let userid = req.session.user_id;
   let username = req.body.username;
   let email = req.body.email;
-  let active = req.body.active;
+  let active = "1";
   console.log(req.file);
   if (username == "") {
     username = users.username;
