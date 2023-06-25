@@ -3,7 +3,17 @@ var Submissions = require("../models/submissions");
 // const { Op } = require("sequelize");
 
 const listSubmissions = async function (req, res, next) {
-  const submissions = await Submissions.findAll();
+  // const submissions = await Submissions.findAll();
+  const { QueryTypes } = require("sequelize");
+  const Sequelize = require("sequelize");
+  const sequilize = new Sequelize("mysql://root@localhost:3306/gpt-team");
+  const submissions = await sequilize.query(
+    "SELECT forms.title, forms.description, submissions.uploaded_file, submissions.description, submissions.updated_at, users.name AS 'form dibuat oleh' FROM submissions, forms, users  WHERE submissions.form_id = forms.form_id AND forms.user_id = users.user_id",
+    {
+      type: QueryTypes.SELECT,
+    }
+  );
+
   res.json(submissions);
 };
 
