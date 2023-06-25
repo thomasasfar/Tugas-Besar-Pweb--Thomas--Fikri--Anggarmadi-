@@ -36,7 +36,7 @@ const listForms = async function (req, res, next) {
     },
     offset: offset,
     limit: limit,
-    order: [["updated_at", "ASC"]],
+    order: [["updated_at", "DESC"]],
   });
   res.json({
     result: result,
@@ -72,7 +72,7 @@ const listFormsMe = async function (req, res, next) {
 
     offset: offset,
     limit: limit,
-    order: [["updated_at", "ASC"]],
+    order: [["updated_at", "DESC"]],
   });
   res.json({
     result: result,
