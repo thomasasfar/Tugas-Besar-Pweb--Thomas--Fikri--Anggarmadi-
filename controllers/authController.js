@@ -131,5 +131,4 @@ module.exports = {
   login_get,
   login_post,
   logout_get,
-  loginBaru,
 };
