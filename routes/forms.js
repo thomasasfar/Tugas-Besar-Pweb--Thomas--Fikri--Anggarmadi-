@@ -23,7 +23,7 @@ router.get("/formMe", authenticateToken, listFormsMe);
 router.get("/formAll", authenticateToken, listFormsAll);
 
 /* ADD forms. */
-router.post("/", authenticateToken, addForms);
+router.post("/", /*authenticateToken,*/ addForms);
 
 /* UPDATE Form. */
 router.post("/:formid/edit", authenticateToken, editForms);

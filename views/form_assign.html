@@ -107,19 +107,19 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form>
+          <form id="addForm">
             <div class="mb-3">
               <label for="exampleInputEmail1" class="form-label">Header Form</label>
-              <input type="text" placeholder="Form Name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+              <input type="text" placeholder="Form Name" class="form-control" id="form_header" aria-describedby="emailHelp">
             </div>
             <div class="mb-3">
               <label for="exampleInputPassword1" class="form-label">Description</label>
-              <textarea class="form-control" placeholder="Description" name="desc" id="" cols="59" rows="3"></textarea>
+              <textarea class="form-control" placeholder="Description" name="desc" id="form_description" cols="59" rows="3"></textarea>
             </div>
-            <div class="mb-3">
+            <!-- <div class="mb-3">
               <label for="exampleInputPassword1" class="form-label">Add File</label>
               <input type="file" class="form-control" id="exampleInputPassword1">
-            </div>
+            </div> -->
           </form>
         </div>
         <div class="modal-footer">
@@ -141,20 +141,20 @@
       const loadData = async () => {
           try {
             
-            console.log("Jwt: ",jwt)
-            console.log("user: ",user_id)
-            var myHeaders = new Headers();
-            myHeaders.append("Authorization", "Bearer "+ jwt);
-            // myHeaders.append("Cookie", "connect.sid=s%3AKpb23T5z5fJmAsg4xTtYQtpRqh43b2mb.NgYTTM1EXhcPbjo39Qv8G92KASUnom5b96yMu%2Bu%2BClI");
+            // console.log("Jwt: ",jwt)
+            // console.log("user: ",user_id)
+            // var myHeaders = new Headers();
+            // myHeaders.append("Authorization", "Bearer "+ jwt);
+            // // myHeaders.append("Cookie", "connect.sid=s%3AKpb23T5z5fJmAsg4xTtYQtpRqh43b2mb.NgYTTM1EXhcPbjo39Qv8G92KASUnom5b96yMu%2Bu%2BClI");
 
 
-            var requestOptions = {
-              method: 'GET',
-              headers: myHeaders,
-              redirect: 'follow',
+            // var requestOptions = {
+            //   method: 'GET',
+            //   headers: myHeaders,
+            //   redirect: 'follow',
 
-            };
-              const url = await fetch('http://localhost:3000/forms', requestOptions);
+            // };
+              const url = await fetch('http://localhost:3000/forms');
               usersData = await url.json();
               console.log(usersData)
               loadUserData(usersData);
@@ -194,6 +194,26 @@
       loadData()
 
     </script>
-
+    <script>
+      const form = document.getElementById('addForm');
+      form.addEventListener('Add', function (e) {
+        e.preventDefault();
+        const userHeader = document.getElementById('form_header').value;
+        const userDescription = document.getElementById('form_description').value;
+        
+        const formData = new FormData();
+        formData.append('user_id', user_id); // Menggunakan user_id yang telah Anda dapatkan sebelumnya
+        formData.append('title', userHeader); // Menyimpan header sebagai title
+        formData.append('description', userDescription);
+    
+        fetch('http://localhost:3000/forms', {
+          method: 'POST',
+          body: formData,
+        })
+          .then(res => res.json())
+          .then(data => console.log(data))
+          .catch(err => console.log(err));
+      });
+    </script>
 </body>
 </html>

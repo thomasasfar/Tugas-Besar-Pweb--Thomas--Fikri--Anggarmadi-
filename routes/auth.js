@@ -5,6 +5,7 @@ const {
   login_get,
   login_post,
   logout_get,
+  loginBaru,
 } = require("../controllers/authController");
 const { authenticateToken } = require("../middleware/verifyToken");
 const cookieParser = require("cookie-parser");
@@ -19,6 +20,7 @@ router.get("/register", signup_get);
 router.post("/register", signup_post);
 router.get("/login", login_get);
 router.post("/login", login_post);
+// router.post("/login", loginBaru);
 router.get("/logout", logout_get);
 
 module.exports = router;
