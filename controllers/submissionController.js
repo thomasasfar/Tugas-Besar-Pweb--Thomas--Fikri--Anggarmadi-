@@ -8,7 +8,7 @@ const listSubmissions = async function (req, res, next) {
   const Sequelize = require("sequelize");
   const sequilize = new Sequelize("mysql://root@localhost:3306/gpt-team");
   const submissions = await sequilize.query(
-    "SELECT forms.title, forms.description as 'Instruksi', submissions.uploaded_file, submissions.description, submissions.updated_at, users.name AS 'form dibuat oleh' FROM submissions, forms, users  WHERE submissions.form_id = forms.form_id AND forms.user_id = users.user_id",
+    "SELECT forms.title, forms.description as 'Instruksi', submissions.form_id, submissions.uploaded_file, submissions.description, submissions.updated_at, users.name AS 'form dibuat oleh' FROM submissions, forms, users  WHERE submissions.form_id = forms.form_id AND forms.user_id = users.user_id",
     {
       type: QueryTypes.SELECT,
     }
