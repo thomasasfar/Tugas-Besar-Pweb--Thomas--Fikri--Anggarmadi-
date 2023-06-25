@@ -32,9 +32,6 @@ const upload = multer({ storage: storage });
 router.get("/", authenticateToken, listSubmissions);
 
 /* GET list submissions. */
-router.get("/download/:formId", /*authenticateToken,*/ downloadFile);
-
-/* GET list submissions. */
 router.get("/riwayat", authenticateToken, riwayatSubmissions);
 
 /* ADD Submissions. */

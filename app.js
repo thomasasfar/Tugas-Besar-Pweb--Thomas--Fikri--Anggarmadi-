@@ -38,4 +38,20 @@ app.use("/forms", formsRouter);
 app.use("/submissions", submissionsRouter);
 app.use("/auth", authRouter);
 
+app.get("/download/:fileName", function (req, res) {
+  const fileName = req.params.fileName;
+  const filePath = __dirname + "/assets/files_upload/" + fileName;
+  // const filePath = __dirname + "/assets/avatar/" + fileName;
+
+  console.log(filePath);
+
+  res.download(filePath, function (err) {
+    if (err) {
+      // Tangani kesalahan jika terjadi
+      console.log(err);
+      res.status(404).send("File tidak ditemukan");
+    }
+  });
+});
+
 module.exports = app;
