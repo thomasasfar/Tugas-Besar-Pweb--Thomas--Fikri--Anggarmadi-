@@ -16,10 +16,58 @@ function buatPin(length) {
 }
 
 const listForms = async function (req, res, next) {
-  const forms = await Form.findAll({
-    attributes: ["form_id", "title", "description", "created_at", "updated_at"],
+  // const forms = await Form.findAll({
+  //   attributes: ["form_id", "title", "description", "created_at", "updated_at"],
+  // });
+  // res.json(forms);
+
+  const page = parseInt(req.query.page) || 0;
+  const limit = parseInt(req.query.limit) || 10;
+  const search = req.query.search_query || "";
+  const offset = limit * page;
+  const totalRows = await Form.count({
+    where: {
+      [Op.or]: [
+        {
+          title: {
+            [Op.like]: "%" + search + "%",
+          },
+        },
+        {
+          description: {
+            [Op.like]: "%" + search + "%",
+          },
+        },
+      ],
+    },
   });
-  res.json(forms);
+  const totalPage = Math.ceil(totalRows / limit);
+  const result = await Form.findAll({
+    where: {
+      [Op.or]: [
+        {
+          title: {
+            [Op.like]: "%" + search + "%",
+          },
+        },
+        {
+          description: {
+            [Op.like]: "%" + search + "%",
+          },
+        },
+      ],
+    },
+    offset: offset,
+    limit: limit,
+    order: [["updated_at", "ASC"]],
+  });
+  res.json({
+    result: result,
+    page: page,
+    limit: limit,
+    totalRows: totalRows,
+    totalPage: totalPage,
+  });
 };
 
 const listFormsMe = async function (req, res, next) {
