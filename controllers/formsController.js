@@ -49,7 +49,7 @@ const listFormsAll = async function (req, res, next) {
 };
 
 const addForms = async function (req, res, next) {
-  let user_id = req.body.user_id;
+  let user_id = req.session.user_id;
   let form_id = buatPin(8);
   let title = req.body.title;
   let description = req.body.description;

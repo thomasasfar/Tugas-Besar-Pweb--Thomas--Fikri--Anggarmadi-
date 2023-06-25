@@ -5,7 +5,6 @@ const {
   login_get,
   login_post,
   logout_get,
-  loginBaru,
 } = require("../controllers/authController");
 const { authenticateToken } = require("../middleware/verifyToken");
 const cookieParser = require("cookie-parser");

@@ -17,9 +17,9 @@ var app = express();
 
 app.use(
   session({
-    secret: process.env.TOKEN_LOGIN,
+    secret: "some-scret",
     resave: false,
-    saveUninitialized: true,
+    saveUninitialized: false,
   })
 );
 app.use(bodyParser.urlencoded({ extended: false }));
