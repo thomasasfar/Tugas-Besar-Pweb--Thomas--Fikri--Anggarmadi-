@@ -64,7 +64,7 @@ const login_get = (req, res) => {
 };
 
 const signup_post = async (req, res) => {
-  const { username, email, password, confPassword } = req.body;
+  const { username, email, name, password, confPassword } = req.body;
   if (password !== confPassword)
     return res
       .status(400)
@@ -80,6 +80,7 @@ const signup_post = async (req, res) => {
   try {
     await users.create({
       username: username,
+      name: name,
       email: email,
       password: hashPassword,
       active: 1,
