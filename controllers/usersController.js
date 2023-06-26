@@ -19,11 +19,15 @@ const editUsers = async function (req, res, next) {
   });
   let userid = req.session.user_id;
   let username = req.body.username;
+  let name = req.body.name;
   let email = req.body.email;
   let active = "1";
   console.log(req.file);
   if (username == "") {
     username = users.username;
+  }
+  if (name == "") {
+    name = users.name;
   }
   if (email == "") {
     email = users.email;
@@ -40,6 +44,7 @@ const editUsers = async function (req, res, next) {
     {
       username: username,
       email: email,
+      name: name,
       active: active,
       avatar: avatar,
     },
@@ -97,7 +102,7 @@ const editPassword = async function (req, res, next) {
 const profileMe = async function (req, res, next) {
   const user_id = req.session.user_id;
   const users = await User.findAll({
-    attributes: ["username", "email", "active", "avatar"],
+    attributes: ["username", "name", "email", "active", "avatar"],
 
     where: {
       user_id: user_id,
