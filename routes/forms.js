@@ -11,6 +11,7 @@ const {
   listFormsMe,
   listFormsAll,
   formSubmit,
+  attendance,
 } = require("../controllers/formsController");
 const { authenticateToken } = require("../middleware/verifyToken");
 
@@ -25,6 +26,8 @@ router.get("/formAll", authenticateToken, listFormsAll);
 
 /* GET other list forms. */
 router.post("/submit", authenticateToken, formSubmit);
+
+router.get("/attend", authenticateToken, attendance);
 
 /* ADD forms. */
 router.post("/", authenticateToken, addForms);
