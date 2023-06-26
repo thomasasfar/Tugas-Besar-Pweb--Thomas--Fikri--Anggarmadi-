@@ -1,8 +1,18 @@
 const { Sequelize, DataTypes } = require("sequelize");
+const dotenv = require("dotenv");
+dotenv.config();
+// const sequilize = new Sequelize("mysql://root@localhost:3306/gpt-team");
+const sequelize = new Sequelize(
+  process.env.MYSQL_DATABASE,
+  process.env.MYSQL_USER,
+  process.env.MYSQL_PASSWORD,
+  {
+    host: process.env.MYSQL_HOST,
+    dialect: "mysql",
+  }
+);
 
-const sequilize = new Sequelize("mysql://root@localhost:3306/gpt-team");
-
-const Forms = sequilize.define(
+const Forms = sequelize.define(
   "Forms",
   {
     form_id: {
@@ -42,10 +52,14 @@ const Forms = sequilize.define(
     updatedAt: "updated_at",
   }
 );
-Forms.prototype.getFormattedUpdatedAt = function() {
-    const updatedDate = this.updated_at;
-    return new Date(updatedDate).toLocaleDateString('id-ID', { day: '2-digit', month: '2-digit', year: 'numeric' });
-};//format tanggal
+Forms.prototype.getFormattedUpdatedAt = function () {
+  const updatedDate = this.updated_at;
+  return new Date(updatedDate).toLocaleDateString("id-ID", {
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
+  });
+}; //format tanggal
 Forms.associate = (models) => {
   Forms.belongsTo(models.User, { foreignKey: "user_Id" });
 };
