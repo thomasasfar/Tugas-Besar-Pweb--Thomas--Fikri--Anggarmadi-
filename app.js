@@ -1,5 +1,6 @@
 var express = require("express");
 var path = require("path");
+const fs = require("fs");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 var cors = require("cors");
@@ -12,6 +13,7 @@ var usersRouter = require("./routes/users");
 var formsRouter = require("./routes/forms");
 var submissionsRouter = require("./routes/submission");
 var authRouter = require("./routes/auth");
+const User = require("./models/users");
 const { authenticateToken } = require("./middleware/verifyToken");
 
 var app = express();
@@ -53,6 +55,35 @@ app.get("/download/:fileName", authenticateToken, function (req, res) {
       res.status(404).send("File tidak ditemukan");
     }
   });
+});
+
+// Definisikan endpoint untuk mengirimkan gambar avatar
+app.get("/avatar", async (req, res) => {
+  const user_id = req.session.user_id;
+  // Ambil path file gambar avatar dari database
+  // const avatarPath = getGambarPath(user_id); // Ganti dengan path yang sesuai di database
+  // console.log("Ada? : ", avatarPath);
+
+  const gambar = await User.findOne({ where: { user_id: user_id } });
+
+  // Periksa apakah gambar ditemukan
+  if (!gambar) {
+    throw new Error("Gambar tidak ditemukan");
+  }
+
+  // Ambil path gambar dari objek Sequelize
+  const imagePath = gambar.avatar;
+
+  // Periksa apakah file gambar ada
+  if (fs.existsSync(imagePath)) {
+    // Set header tipe konten sebagai gambar
+    res.setHeader("Content-Type", "image/jpeg"); // Ganti dengan tipe konten yang sesuai
+
+    // Baca file gambar dan kirimkan sebagai respons
+    fs.createReadStream(imagePath).pipe(res);
+  } else {
+    res.status(404).send("Gambar avatar tidak ditemukan");
+  }
 });
 
 module.exports = app;

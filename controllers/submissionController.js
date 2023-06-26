@@ -98,10 +98,40 @@ const deleteSubmissions = async function (req, res, next) {
     });
 };
 
+const paginationSubs = async function (req, res, next) {
+  const user_id = req.session.user_id;
+  const page = parseInt(req.query.page) || 0;
+  const limit = parseInt(req.query.limit) || 5;
+  const offset = limit * page;
+  const totalRows = await Submissions.count({
+    where: {
+      user_id: user_id,
+    },
+  });
+  const totalPage = Math.ceil(totalRows / limit);
+  const result = await Submissions.findAll({
+    where: {
+      user_id: user_id,
+    },
+
+    offset: offset,
+    limit: limit,
+    order: [["updated_at", "DESC"]],
+  });
+  res.json({
+    result: result,
+    page: page,
+    limit: limit,
+    totalRows: totalRows,
+    totalPage: totalPage,
+  });
+};
+
 module.exports = {
   listSubmissions,
   riwayatSubmissions,
   addSubmissions,
   editSubmissions,
   deleteSubmissions,
+  paginationSubs,
 };

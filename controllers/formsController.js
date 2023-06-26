@@ -1,6 +1,7 @@
 var express = require("express");
 var Form = require("../models/forms");
 const { Op } = require("sequelize");
+const User = require("../models/users");
 
 function buatPin(length) {
   const charList =
@@ -198,6 +199,18 @@ const deletForms = async function (req, res, next) {
     });
 };
 
+const formSubmit = async function (req, res, next) {
+  let form_id = req.body.form_id;
+
+  const forms = await Form.findAll({
+    attributes: ["form_id", "title", "description", "created_at", "updated_at"],
+    where: {
+      form_id: form_id,
+    },
+  });
+  res.json(forms);
+};
+
 module.exports = {
   listForms,
   listFormsMe,
@@ -205,4 +218,5 @@ module.exports = {
   addForms,
   editForms,
   deletForms,
+  formSubmit,
 };
