@@ -44,7 +44,6 @@ app.use("/auth", authRouter);
 app.get("/download/:fileName", authenticateToken, function (req, res) {
   const fileName = req.params.fileName;
   const filePath = __dirname + "/assets/files_upload/" + fileName;
-  // const filePath = __dirname + "/assets/avatar/" + fileName;
 
   console.log(filePath);
 
