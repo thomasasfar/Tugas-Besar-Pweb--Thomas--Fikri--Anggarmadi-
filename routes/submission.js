@@ -13,6 +13,7 @@ const {
   deleteSubmissions,
   riwayatSubmissions,
   downloadFile,
+  paginationSubs,
 } = require("../controllers/submissionController");
 
 const { authenticateToken } = require("../middleware/verifyToken");
@@ -59,5 +60,7 @@ router.post("/:formid/edit", authenticateToken, editSubmissions);
 
 /* DELETE submission. */
 router.post("/:formid/delete", authenticateToken, deleteSubmissions);
+
+router.get("/riwayatPage", authenticateToken, paginationSubs);
 
 module.exports = router;
