@@ -6,24 +6,9 @@ const listSubmissions = async function (req, res, next) {
   // const submissions = await Submissions.findAll();
   const { QueryTypes } = require("sequelize");
   const Sequelize = require("sequelize");
-<<<<<<< HEAD
   
 const sequilize = new Sequelize("mysql://kump1665_kumpulin:gpt_teams12@srv49.niagahoster.com/kump1665_gpt_teams");
   const submissions = await sequilize.query(
-=======
-  const dotenv = require("dotenv");
-  dotenv.config();
-  const sequelize = new Sequelize(
-    process.env.MYSQL_DATABASE,
-    process.env.MYSQL_USER,
-    process.env.MYSQL_PASSWORD,
-    {
-      host: process.env.MYSQL_HOST,
-      dialect: "mysql",
-    }
-  );
-  const submissions = await sequelize.query(
->>>>>>> 807baa5392b66eb54a84a0d8e3def54b400b0fa6
     "SELECT forms.title, forms.description as 'Instruksi', submissions.form_id, submissions.uploaded_file, submissions.description, submissions.updated_at, users.name AS 'form dibuat oleh' FROM submissions, forms, users  WHERE submissions.form_id = forms.form_id AND forms.user_id = users.user_id",
     {
       type: QueryTypes.SELECT,
