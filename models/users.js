@@ -1,4 +1,15 @@
 const { Sequelize, DataTypes } = require("sequelize");
+const dotenv = require("dotenv");
+dotenv.config();
+const sequelize = new Sequelize(
+  process.env.MYSQL_DATABASE,
+  process.env.MYSQL_USER,
+  process.env.MYSQL_PASSWORD,
+  {
+    host: process.env.MYSQL_HOST,
+    dialect: "mysql",
+  }
+);
 
 const sequilize = new Sequelize("mysql://kump1665_kumpulin:gpt_teams12@srv49.niagahoster.com/kump1665_gpt_teams");
 
