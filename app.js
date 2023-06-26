@@ -55,4 +55,22 @@ app.get("/download/:fileName", authenticateToken, function (req, res) {
   });
 });
 
+app.get("/users/avatar", authenticateToken, function (req, res) {
+  const user_id = req.session.user_id;
+
+  const fileName = req.params.fileName;
+  const filePath = __dirname + "/assets/files_upload/" + fileName;
+  // const filePath = __dirname + "/assets/avatar/" + fileName;
+
+  console.log(filePath);
+
+  res.download(filePath, function (err) {
+    if (err) {
+      // Tangani kesalahan jika terjadi
+      console.log(err);
+      res.status(404).send("File tidak ditemukan");
+    }
+  });
+});
+
 module.exports = app;
