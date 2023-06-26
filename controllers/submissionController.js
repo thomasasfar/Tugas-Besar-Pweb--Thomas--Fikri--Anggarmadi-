@@ -31,8 +31,18 @@ const riwayatSubmissions = async function (req, res, next) {
   const user_id = req.session.user_id;
   const { QueryTypes } = require("sequelize");
   const Sequelize = require("sequelize");
-  const sequilize = new Sequelize("mysql://root@localhost:3306/gpt-team");
-  const submissions = await sequilize.query(
+  const dotenv = require("dotenv");
+  dotenv.config();
+  const sequelize = new Sequelize(
+    process.env.MYSQL_DATABASE,
+    process.env.MYSQL_USER,
+    process.env.MYSQL_PASSWORD,
+    {
+      host: process.env.MYSQL_HOST,
+      dialect: "mysql",
+    }
+  );
+  const submissions = await sequelize.query(
     "SELECT forms.title, forms.description as 'Instruksi', submissions.form_id, submissions.uploaded_file, submissions.description, submissions.updated_at, users.name AS 'form dibuat oleh' FROM submissions, forms, users  WHERE submissions.form_id = forms.form_id AND forms.user_id = users.user_id AND submissions.user_id =" +
       user_id,
     {
