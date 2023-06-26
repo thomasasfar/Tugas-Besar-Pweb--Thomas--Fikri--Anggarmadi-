@@ -6,7 +6,8 @@ const listSubmissions = async function (req, res, next) {
   // const submissions = await Submissions.findAll();
   const { QueryTypes } = require("sequelize");
   const Sequelize = require("sequelize");
-  const sequilize = new Sequelize("mysql://root@localhost:3306/gpt-team");
+  
+const sequilize = new Sequelize("mysql://kump1665_kumpulin:gpt_teams12@srv49.niagahoster.com/kump1665_gpt_teams");
   const submissions = await sequilize.query(
     "SELECT forms.title, forms.description as 'Instruksi', submissions.form_id, submissions.uploaded_file, submissions.description, submissions.updated_at, users.name AS 'form dibuat oleh' FROM submissions, forms, users  WHERE submissions.form_id = forms.form_id AND forms.user_id = users.user_id",
     {
@@ -21,7 +22,9 @@ const riwayatSubmissions = async function (req, res, next) {
   const user_id = req.session.user_id;
   const { QueryTypes } = require("sequelize");
   const Sequelize = require("sequelize");
-  const sequilize = new Sequelize("mysql://root@localhost:3306/gpt-team");
+  const sequilize = new Sequelize(
+    "mysql://kump1665_kumpulin:gpt_teams12@gpt.kumpulin.website/gpt_teams"
+  );
   const submissions = await sequilize.query(
     "SELECT forms.title, forms.description as 'Instruksi', submissions.form_id, submissions.uploaded_file, submissions.description, submissions.updated_at, users.name AS 'form dibuat oleh' FROM submissions, forms, users  WHERE submissions.form_id = forms.form_id AND forms.user_id = users.user_id AND submissions.user_id =" +
       user_id,

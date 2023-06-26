@@ -215,7 +215,10 @@ const attendance = async function (req, res, next) {
   const user_id = req.session.user_id;
   const { QueryTypes } = require("sequelize");
   const Sequelize = require("sequelize");
-  const sequilize = new Sequelize("mysql://root@localhost:3306/gpt-team");
+
+  const sequilize = new Sequelize(
+    "mysql://kump1665_kumpulin:gpt_teams12@srv49.niagahoster.com/kump1665_gpt_teams"
+  );
   const form = await sequilize.query(
     "SELECT u.name, s.uploaded_file, s.updated_at, f.title FROM users u JOIN forms f ON u.user_id = f.user_id JOIN submissions s ON f.form_id = s.form_id WHERE f.user_id = " +
       user_id,

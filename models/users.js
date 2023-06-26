@@ -1,6 +1,6 @@
 const { Sequelize, DataTypes } = require("sequelize");
 
-const sequilize = new Sequelize("mysql://root@localhost:3306/gpt-team");
+const sequilize = new Sequelize("mysql://kump1665_kumpulin:gpt_teams12@srv49.niagahoster.com/kump1665_gpt_teams");
 
 const User = sequilize.define(
   "User",

@@ -2,9 +2,10 @@
   "name": "gpt-team",
   "version": "0.0.0",
   "private": true,
+  "main" : "app.js",
   "scripts": {
     "start": "nodemon ./bin/www",
-    "startdev": "nodemon ./bin/www"
+    "startdev": "nodemon app.js"
   },
   "dependencies": {
     "bcrypt": "^5.1.0",
