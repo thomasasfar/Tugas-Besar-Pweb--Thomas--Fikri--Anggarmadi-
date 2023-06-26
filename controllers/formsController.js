@@ -28,15 +28,43 @@ const listForms = async function (req, res, next) {
     where: {
       user_id: "1",
     },
+    // where: {
+    //   [Op.or]: [
+    //     {
+    //       title: {
+    //         [Op.like]: "%" + search + "%",
+    //       },
+    //     },
+    //     {
+    //       description: {
+    //         [Op.like]: "%" + search + "%",
+    //       },
+    //     },
+    //   ],
+    // },
   });
   const totalPage = Math.ceil(totalRows / limit);
   const result = await Form.findAll({
     where: {
       user_id: "1",
     },
+    // where: {
+    //   [Op.or]: [
+    //     {
+    //       title: {
+    //         [Op.like]: "%" + search + "%",
+    //       },
+    //     },
+    //     {
+    //       description: {
+    //         [Op.like]: "%" + search + "%",
+    //       },
+    //     },
+    //   ],
+    // },
     offset: offset,
     limit: limit,
-    order: [["updated_at", "DESC"]],
+    order: [["updated_at", "ASC"]],
   });
   res.json({
     result: result,
