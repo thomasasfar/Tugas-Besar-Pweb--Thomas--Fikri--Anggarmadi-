@@ -10,7 +10,7 @@ const listSubmissions = async function (req, res, next) {
   dotenv.config();
   const sequelize = new Sequelize(
     process.env.MYSQL_DATABASE,
-    process.env.MYSQL_USER,
+    "root",
     process.env.MYSQL_PASSWORD,
 
     {
@@ -36,7 +36,7 @@ const riwayatSubmissions = async function (req, res, next) {
   dotenv.config();
   const sequelize = new Sequelize(
     process.env.MYSQL_DATABASE,
-    process.env.MYSQL_USER,
+    "root",
     process.env.MYSQL_PASSWORD,
     {
       host: process.env.MYSQL_HOST,
