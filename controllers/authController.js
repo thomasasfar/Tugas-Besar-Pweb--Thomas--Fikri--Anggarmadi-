@@ -105,7 +105,11 @@ const login_post = async (req, res) => {
     const token = createToken(user.id);
 
     req.session.user_id = user.user_id;
-    res.cookie("jwt", token, { httpOnly: true, sameSite: "none" });
+    res.cookie("jwt", token, {
+      httpOnly: true,
+      sameSite: "none",
+      secure: true,
+    });
 
     res.status(200).json({
       user: req.session.user_id,
