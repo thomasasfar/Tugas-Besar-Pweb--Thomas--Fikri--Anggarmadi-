@@ -23,6 +23,10 @@ app.use(
     secret: "some-scret",
     resave: false,
     saveUninitialized: false,
+    cookie: {
+      sameSite: "none",
+      secure: true,
+    },
   })
 );
 app.use(bodyParser.urlencoded({ extended: false }));
