@@ -2,7 +2,7 @@ const { Sequelize, DataTypes } = require("sequelize");
 const dotenv = require("dotenv");
 dotenv.config();
 const sequelize = new Sequelize(
-  process.env.MYSQL_DATABASE,
+  "gpt_team",
   "root",
   process.env.MYSQL_PASSWORD,
   {

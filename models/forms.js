@@ -3,7 +3,7 @@ const dotenv = require("dotenv");
 dotenv.config();
 // const sequilize = new Sequelize("mysql://root@localhost:3306/gpt-team");
 const sequelize = new Sequelize(
-  process.env.MYSQL_DATABASE,
+  "gpt_team",
   "root",
   process.env.MYSQL_PASSWORD,
   {
